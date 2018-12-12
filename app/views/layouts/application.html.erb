@@ -36,8 +36,9 @@
               <div class="dropdown show">
                 <%= link_to current_user.name, edit_user_registration_path(current_user), class: 'btn btn-secondary dropdown-toggle', 'role' => "button", 'id' => "dropdownMenuLink", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false" %>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: 'dropdown-item' %>
                   <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+                  <%= link_to 'My profile', user_path(current_user), class: 'dropdown-item' %>
+                </div>
                 </div>
                 <% else %>
                 <div class="nav-item">
