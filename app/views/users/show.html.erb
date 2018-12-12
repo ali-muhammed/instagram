@@ -1,15 +1,39 @@
 <div class="card bg-light mb-3 rounded mx-auto d-block align-top" style="max-width: 180rem;">
-  <div class="card-header">
-  	<% if @user.avatar.attached? %>
+	<div class="card-header">
+		<% if @user.avatar.attached? %>
 		<%= image_tag @user.avatar, size: 100, class: 'rounded-circle' %>
-	<% end %>
-	<%= @user.email %>
-	<button type="button" class="btn btn-dark">
-		<%= link_to 'Edit', edit_user_registration_path, class: 'text-light' %>	
-	</button>
+		<% end %>
+		<%= @user.email %>
+		<button type="button" class="btn btn-dark">
+			<%= link_to 'Edit', edit_user_registration_path, class: 'text-light' %>	
+		</button>
+	</div>
+	<div class="card-body">
+		<h5 class="card-title"><%= @user.name %></h5>
+		<p class="card-text"></p>
+	</div>
 </div>
-  <div class="card-body">
-    <h5 class="card-title"><%= @user.name %></h5>
-    <p class="card-text"></p>
-  </div>
-</div>
+<button type="button" class="btn btn-dark">
+	<%= link_to 'Create new post', new_post_path, class: 'text-light' %>	
+</button>
+
+<% @user.posts.each do |post| %>
+<div class="card bg-light mb-3 rounded mx-auto d-block" style="max-width: 25rem;">
+	<div class="card-header">
+		<% if @user.avatar.attached? %>
+		<%= image_tag @user.avatar, size: 40 , class: 'rounded-circle'  %>
+		<% end %>
+		<%= @user.email %>
+		<%= link_to 'Edit', edit_post_path(post.id) %>
+		<%= link_to 'Delete', post_path(post.id), method: :delete, data: {confirm: 'Are you sure?'} %>
+		</div>
+	<div class="card-body p-0">
+			<% post.pictures.each do |picture| %>
+			<%= image_tag picture, size: 320, class: 'rounded w-100 h-50 d-block' %>
+			<% end %>
+	</div>
+	<div class="card-footer text-muted">
+			<p class="text-body"><%= @user.email %>:  <%= post.description %> </p>
+	</div>
+</div> 
+<% end %>
